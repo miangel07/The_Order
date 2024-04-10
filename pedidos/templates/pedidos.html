@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toma de Pedido</title>
+</head>
+<body>
+    <h1>Selecciona los productos</h1>
+    <form method="post">
+        {% csrf_token %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="">ingrese su nombre </label>
+            <input type="text" name="cliente" placeholder="ingrese su nombre" required>
+            <label for="para_llevar">¿Para llevar?</label>
+            <input type="checkbox" id="para_llevar" name="para_llevar" value="True" checked>
+            <label for="">ingrese alguna observacion de como quiere su producto</label>
+            <input type="text" name="observaciones" placeholder="observaciones del producto"required>
+            <label for="productos">Seleccione su pedido</label>
+            <ul>
+                {% for producto in productos %}
+                <li>
+                    <label for="">selecione la cantidad</label>
+                    <input type="number" name="cantidad" placeholder="cantidad">
+                    <input type="checkbox" name="productos" value="{{ producto.id }}">
+                    {{ producto.nombre }}
+                </li>
+                {% endfor %}
+            </ul>
+            <input type="submit" value="Guardar">
+    <hr>
+    <h2>Productos Disponibles</h2>
+    <ul>
+        {% for producto in productos %}
+            <li>{{ producto.nombre }} - {{ producto.descripcion }} - ${{ producto.precio }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
